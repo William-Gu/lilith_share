@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>渲染机制 - 选择器</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .btn{
+      position: absolute;
+      top: 10px;
+      left:20px;
+    }
+    .ul-first-item{
+      color:blue;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <button class="btn" id="button"> Click Me !</button>
+    <ul class="ul-first">
+      <li class="ul-first-item"><div><span>1</span><span>2</span></div></li>
+      <li class="ul-first-item"><div><span>1</span><span>2</span></div></li>
+      <li class="ul-first-item"><div><span>1</span><span>2</span></div></li>
+      <li class="ul-first-item"><div><span>1</span><span>2</span></div></li>
+    </ul>
+  </div>
+  <script>
+    var root = document.querySelector('#root');
+    var button = document.querySelector('#button');
+
+    for (var i = 0; i < 10000; i++) {
+      var ul = document.createElement("ul")
+
+      ul.innerHTML = `
+        <li><div><span>1</span><span>2</span></div></li>
+        <li><div><span>1</span><span>2</span></div></li>
+        <li><div><span>1</span><span>2</span></div></li>
+        <li><div><span>1</span><span>2</span></div></li>
+      `;
+
+      root.appendChild(ul);
+    }
+
+    button.addEventListener('click', function() {
+      var selectors = [
+        ".ul-first-item",
+        "ul:nth-of-type(2) li",
+        "ul:nth-last-child(2) li",
+        ".ul-first > span"
+      ];
+
+      selectors.forEach(function(s) {
+        console.time(s);
+        var d = document.querySelector(s);
+        console.timeEnd(s);
+        console.log(d);
+      });
+
+    });
+  </script>
+</body>
+</html>
