@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>渲染机制 - 创建10000个ul</title>
+  <style>
+    body{
+      margin:0;
+    }
+    #root{
+      padding: 20px;
+      background: #eee;
+    }
+    ul {
+      margin-right:6px;
+      padding: 0;
+      display: inline-block;
+      width: 160px;
+      height: 100px; 
+    }
+
+    ul > li{
+      margin: 0;
+      display: inline-block;
+      box-sizing: border-box;
+      width: 40px;
+      height: 100%;
+      border: 1px solid red;
+      list-style: none;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+  <script>
+    var root = document.querySelector("#root");
+
+    setTimeout(()=>{
+      new Array(10000).fill(0).forEach(item => {
+        var ul = document.createElement("ul");
+  
+        new Array(4).fill(0).forEach(item => {
+          ul.appendChild(document.createElement("li"))
+        })
+        root.appendChild(ul)
+      })
+    },500)
+    
+
+  </script>
+</body>
+</html>
