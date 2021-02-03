@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>渲染机制 - 选择器2</title>
+  <style>
+    .abc{color:red}
+  </style>
+</head>
+<body>
+  <div id="a">
+    <div>
+      <div id="b">
+        Hello World
+      </div>
+    </div>
+  </div>
+  <style id="style">
+    /* .a div div{
+        fontSize: 18px;
+    }
+    div div .b {
+        color: beautifulColor;
+    } */
+  </style>
+  <script>
+    for (var i = 0; i < 20; i++) {
+      var root = document.createElement("div"),
+        e = root;
+
+      if(i == 5) e.className = "a";
+
+      for(var j = 0; j < 2000;j++){
+        e.appendChild(document.createElement("div"))
+        e = e.firstChild;
+        if(i==5 && j == 1950) e.className = "b";
+      }
+
+      document.body.appendChild(root)
+    }
+
+    var t1 = new Date().getTime();
+    
+    document.getElementById("style").innerHTML = ".a" + new Array(1900).join("div ")+ "{color: red}"
+    // document.getElementById("style").innerHTML = new Array(1900).join("div ")+ ".b {color: red}"
+
+    window.onload = function(){
+      console.log(new Date().getTime() - t1)
+    }
+
+  </script>
+</body>
+</html>
