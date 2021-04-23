@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>渲染机制 - 选择器2</title>
-  <style>
-    .abc{color:red}
-  </style>
+  <style id="style"></style>
 </head>
 <body>
   <div id="a">
@@ -16,14 +14,6 @@
       </div>
     </div>
   </div>
-  <style id="style">
-    /* .a div div{
-        fontSize: 18px;
-    }
-    div div .b {
-        color: beautifulColor;
-    } */
-  </style>
   <script>
     for (var i = 0; i < 20; i++) {
       var root = document.createElement("div"),
@@ -41,14 +31,13 @@
     }
 
     var t1 = new Date().getTime();
-    
-    document.getElementById("style").innerHTML = ".a" + new Array(1900).join("div ")+ "{color: red}"
-    // document.getElementById("style").innerHTML = new Array(1900).join("div ")+ ".b {color: red}"
+    // document.getElementById("style").innerHTML = ".a" + new Array(1900).join("div ")+ "{color: red}"
+    document.getElementById("style").innerHTML = new Array(1900).join("div ")+ ".b {color: red}"
 
     window.onload = function(){
       console.log(new Date().getTime() - t1)
     }
-
+    
   </script>
 </body>
 </html>
